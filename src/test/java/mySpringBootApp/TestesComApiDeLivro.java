@@ -121,20 +121,6 @@ class TestesComApiDeLivro {
 	}
 	
 	@Test
-	void testandoPutErro() throws Exception {
-		when(service.save(ArgumentMatchers.any(Livro.class))).thenThrow(NotFoundException.class);
-		Map<String, String> livroAtualizado  = new HashMap<String, String>() {{
-		    put("id", "99");
-		    put("titulo", "Java Core 2020");
-		    put("numeroDePaginas", "111");
-		}};
-		String livroComoJson = objectMapper.writeValueAsString(livroAtualizado);
-		mockMvc.perform(MockMvcRequestBuilders.put("/api/livros/{id}", "99")
-				.contentType(MediaType.APPLICATION_JSON)
-				.content(livroComoJson));
-	}
-	
-	@Test
 	void testandoDeleteSucesso() throws Exception {
 		Livro livro = new Livro("99", "Java Core 2020", 104);
 		when(service.getById(livro.getId())).thenReturn(livro);
